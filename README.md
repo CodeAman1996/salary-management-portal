@@ -69,6 +69,58 @@ npm run db:generate
 npm run db:migrate
 ```
 
+## Seed Employees
+
+The seed script creates employee records by combining names from:
+
+```txt
+backend/src/seed/first_names.txt
+backend/src/seed/last_names.txt
+```
+
+By default, it creates `10,000` employees and inserts them in batches of `1,000`.
+
+Run the seed script:
+
+```bash
+cd backend
+npm run db:seed
+```
+
+Run the seed script with fewer employees while testing:
+
+```powershell
+$env:SEED_EMPLOYEE_COUNT=20
+npm run db:seed
+```
+
+Optional batch size override:
+
+```powershell
+$env:SEED_EMPLOYEE_COUNT=10000
+$env:SEED_BATCH_SIZE=500
+npm run db:seed
+```
+
+Check seeded data with Prisma Studio:
+
+```bash
+npx prisma studio
+```
+
+Or check directly inside PostgreSQL:
+
+```bash
+docker exec -it salary-management-postgres psql -U postgres -d salary_management
+```
+
+Inside `psql`:
+
+```sql
+SELECT COUNT(*) FROM "Employee";
+SELECT * FROM "Employee" LIMIT 5;
+```
+
 If you need to recreate the local database from scratch:
 
 ```bash
@@ -96,6 +148,46 @@ GET    /api/employees/:id
 POST   /api/employees
 PUT    /api/employees/:id
 DELETE /api/employees/:id
+
+GET    /api/insights/summary
+GET    /api/insights/salary-by-country?country=India
+GET    /api/insights/average-by-job-title?country=India&jobTitle=Software Engineer
+```
+
+## Insights Module
+
+The insights module helps HR managers understand salary patterns.
+
+`GET /api/insights/summary`
+
+Returns:
+
+```txt
+total employees
+total countries
+minimum salary
+maximum salary
+average salary
+```
+
+`GET /api/insights/salary-by-country?country=India`
+
+Returns:
+
+```txt
+employee count in the selected country
+minimum salary in that country
+maximum salary in that country
+average salary in that country
+```
+
+`GET /api/insights/average-by-job-title?country=India&jobTitle=Software Engineer`
+
+Returns:
+
+```txt
+employee count for the selected country and job title
+average salary for that job title in that country
 ```
 
 ## Example Employee Request
