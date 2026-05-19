@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Salary Management Portal
 
 Minimal salary management tool for HR managers to manage employee records and understand salary patterns across countries and roles.
@@ -7,19 +6,36 @@ Minimal salary management tool for HR managers to manage employee records and un
 
 - Backend first implementation with Node.js, Express, TypeScript, PostgreSQL, and Prisma.
 - Employee CRUD API with validation and pagination.
-- Salary insights API for country-level salary stats and job-title averages.
-- Seed script designed for 10,000 employees using batched inserts.
-- Unit tests for the core employee and insights services.
+- PostgreSQL runs locally through Docker Compose.
+- Prisma migrations manage the database schema.
+- Unit tests cover core backend behavior.
+
+## Prerequisites
+
+Install these before running the project:
+
+- Node.js 20+
+- npm
+- Docker Desktop
+- Git
 
 ## Local Backend Setup
 
+From the project root:
+
+```bash
+cd C:\Users\Aman\salary-management-portal
+docker compose up -d
+```
+
+Then set up the backend:
+
 ```bash
 cd backend
-cp .env.example .env
 npm install
-docker compose up -d
+copy .env.example .env
+npm run db:generate
 npm run db:migrate
-npm run db:seed
 npm run dev
 ```
 
@@ -27,6 +43,48 @@ The API runs at:
 
 ```txt
 http://localhost:4000
+```
+
+Health check:
+
+```bash
+curl http://localhost:4000/health
+```
+
+## Environment Variables
+
+The local Docker PostgreSQL database uses port `5433` on your machine.
+
+```env
+DATABASE_URL="postgresql://postgres:postgres@localhost:5433/salary_management?schema=public"
+PORT=4000
+CORS_ORIGIN="http://localhost:5173"
+```
+
+## Database Commands
+
+```bash
+cd backend
+npm run db:generate
+npm run db:migrate
+```
+
+If you need to recreate the local database from scratch:
+
+```bash
+cd C:\Users\Aman\salary-management-portal
+docker compose down -v
+docker compose up -d
+cd backend
+npm run db:migrate
+```
+
+## Test And Build
+
+```bash
+cd backend
+npm test
+npm run build
 ```
 
 ## API Endpoints
@@ -38,17 +96,14 @@ GET    /api/employees/:id
 POST   /api/employees
 PUT    /api/employees/:id
 DELETE /api/employees/:id
-
-GET    /api/insights/summary
-GET    /api/insights/salary-by-country?country=India
-GET    /api/insights/average-by-job-title?country=India&jobTitle=Software Engineer
 ```
 
-## Testing
+## Example Employee Request
 
 ```bash
-cd backend
-npm test
+curl -X POST http://localhost:4000/api/employees ^
+  -H "Content-Type: application/json" ^
+  -d "{\"fullName\":\"Aman Sharma\",\"email\":\"aman.sharma@example.com\",\"jobTitle\":\"Software Engineer\",\"department\":\"Engineering\",\"country\":\"India\",\"salary\":100000,\"currency\":\"INR\"}"
 ```
 
 ## Deployment Plan
@@ -58,7 +113,3 @@ npm test
 - Frontend: to be added after backend completion
 
 Docker is included only for local development convenience. The app uses `DATABASE_URL`, so Render can connect to any hosted PostgreSQL database.
-=======
-# salary-management-portal
-Salary management portal to manage salaries of employees based on their department and the relevant metrics
->>>>>>> 1a006d37dcd7c7b22a76efbfee533c8fbefe2a68
