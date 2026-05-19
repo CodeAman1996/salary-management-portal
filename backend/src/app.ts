@@ -3,6 +3,7 @@ import express from "express";
 import helmet from "helmet";
 import { env } from "./config/env.js";
 import { employeeRouter } from "./modules/employees/employee.routes.js";
+import { insightsRouter } from "./modules/insights/insights.routes.js";
 import { errorResponse, successResponse } from "./utils/response.js";
 
 export function createApp() {
@@ -17,6 +18,7 @@ export function createApp() {
   });
 
   app.use("/api/employees", employeeRouter);
+  app.use("/api/insights", insightsRouter);
 
   app.use((_req, res) => {
     errorResponse(res, 404, "Route not found");
