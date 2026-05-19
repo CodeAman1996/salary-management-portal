@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Salary Management Portal
 
 Minimal salary management tool for HR managers to manage employee records and understand salary patterns across countries and roles.
@@ -57,3 +58,7 @@ npm test
 - Frontend: to be added after backend completion
 
 Docker is included only for local development convenience. The app uses `DATABASE_URL`, so Render can connect to any hosted PostgreSQL database.
+=======
+# salary-management-portal
+Salary management portal to manage salaries of employees based on their department and the relevant metrics
+>>>>>>> 1a006d37dcd7c7b22a76efbfee533c8fbefe2a68
