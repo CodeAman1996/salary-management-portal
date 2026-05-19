@@ -36,13 +36,31 @@ export async function deleteEmployee(id: string): Promise<void> {
 }
 
 function cleanEmployeeInput<T extends CreateEmployeeInput | UpdateEmployeeInput>(input: T): T {
-  return {
-    ...input,
-    fullName: input.fullName?.trim(),
-    email: input.email?.trim().toLowerCase() || null,
-    jobTitle: input.jobTitle?.trim(),
-    department: input.department?.trim(),
-    country: input.country?.trim(),
-    currency: input.currency?.trim().toUpperCase()
-  };
+  const cleanedInput = { ...input };
+
+  if (input.fullName) {
+    cleanedInput.fullName = input.fullName.trim();
+  }
+
+  if (input.email !== undefined) {
+    cleanedInput.email = input.email ? input.email.trim().toLowerCase() : null;
+  }
+
+  if (input.jobTitle) {
+    cleanedInput.jobTitle = input.jobTitle.trim();
+  }
+
+  if (input.department) {
+    cleanedInput.department = input.department.trim();
+  }
+
+  if (input.country) {
+    cleanedInput.country = input.country.trim();
+  }
+
+  if (input.currency) {
+    cleanedInput.currency = input.currency.trim().toUpperCase();
+  }
+
+  return cleanedInput;
 }
