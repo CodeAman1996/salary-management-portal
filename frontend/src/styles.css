@@ -128,6 +128,135 @@ a {
   gap: 14px;
 }
 
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.insight-card {
+  display: flex;
+  gap: 14px;
+  border: 1px solid rgba(23, 33, 29, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  padding: 18px;
+  box-shadow: 0 12px 30px rgba(15, 32, 28, 0.08);
+}
+
+.insight-card span {
+  color: #66756f;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.insight-card strong {
+  display: block;
+  margin-top: 8px;
+  color: #12211d;
+  font-size: 24px;
+}
+
+.insight-card p {
+  margin: 6px 0 0;
+  color: #66756f;
+  font-size: 13px;
+}
+
+.insight-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+}
+
+.insight-green .insight-icon {
+  background: #dff8ed;
+  color: #0f766e;
+}
+
+.insight-blue .insight-icon {
+  background: #e0ecff;
+  color: #2563eb;
+}
+
+.insight-amber .insight-icon {
+  background: #fff3d6;
+  color: #d97706;
+}
+
+.insight-rose .insight-icon {
+  background: #ffe4e6;
+  color: #e11d48;
+}
+
+.insight-filters {
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+}
+
+.insight-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.insight-panel {
+  display: grid;
+  gap: 16px;
+  border: 1px solid rgba(23, 33, 29, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 18px;
+  box-shadow: 0 18px 34px rgba(15, 32, 28, 0.1);
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.panel-heading svg {
+  color: #0f766e;
+}
+
+.panel-heading h2 {
+  margin: 0 0 4px;
+  color: #12211d;
+  font-size: 20px;
+}
+
+.panel-heading p {
+  margin: 0;
+  color: #66756f;
+}
+
+.metric-list {
+  display: grid;
+  gap: 10px;
+}
+
+.metric-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-radius: 8px;
+  background: #f4f8f6;
+  padding: 12px;
+}
+
+.metric-row span {
+  color: #66756f;
+  font-weight: 700;
+}
+
+.metric-row strong {
+  color: #12211d;
+  font-size: 18px;
+}
+
 .summary-tile {
   position: relative;
   overflow: hidden;
@@ -576,6 +705,12 @@ a {
   }
 
   .summary-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .insight-grid,
+  .insight-detail-grid,
+  .insight-filters {
     grid-template-columns: 1fr;
   }
 
