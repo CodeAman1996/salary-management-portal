@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createEmployee, updateEmployee } from "../api/employeesApi";
+import { createEmployee, deleteEmployee, updateEmployee } from "../api/employeesApi";
+import { DeleteEmployeeDialog } from "../components/DeleteEmployeeDialog";
 import { EmployeeFilters } from "../components/EmployeeFilters";
 import { EmployeeForm } from "../components/EmployeeForm";
 import { EmployeeTable } from "../components/EmployeeTable";
@@ -21,7 +22,9 @@ export function EmployeesPage() {
   const [filters, setFilters] = useState(initialFilters);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
+  const [employeeToDelete, setEmployeeToDelete] = useState<Employee | null>(null);
   const [formError, setFormError] = useState("");
+  const [deleteError, setDeleteError] = useState("");
   const { data, isError, isFetching, isLoading } = useEmployees(filters);
   const queryClient = useQueryClient();
 
@@ -33,6 +36,12 @@ export function EmployeesPage() {
   const updateMutation = useMutation({
     mutationFn: ({ id, input }: { id: string; input: EmployeeFormInput }) => updateEmployee(id, input),
     onSuccess: handleSuccessfulSave
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: deleteEmployee,
+    onSuccess: handleSuccessfulDelete,
+    onError: () => setDeleteError("Unable to delete employee. Please try again.")
   });
 
   function changePage(page: number) {
@@ -60,6 +69,16 @@ export function EmployeesPage() {
     setFormError("");
   }
 
+  function openDeleteDialog(employee: Employee) {
+    setEmployeeToDelete(employee);
+    setDeleteError("");
+  }
+
+  function closeDeleteDialog() {
+    setEmployeeToDelete(null);
+    setDeleteError("");
+  }
+
   function saveEmployee(input: EmployeeFormInput) {
     setFormError("");
 
@@ -80,6 +99,19 @@ export function EmployeesPage() {
 
   function handleSuccessfulSave() {
     closeForm();
+    queryClient.invalidateQueries({ queryKey: ["employees"] });
+  }
+
+  function confirmDeleteEmployee() {
+    if (!employeeToDelete) {
+      return;
+    }
+
+    deleteMutation.mutate(employeeToDelete.id);
+  }
+
+  function handleSuccessfulDelete() {
+    closeDeleteDialog();
     queryClient.invalidateQueries({ queryKey: ["employees"] });
   }
 
@@ -125,6 +157,17 @@ export function EmployeesPage() {
         </div>
       ) : null}
 
+      {employeeToDelete ? (
+        <DeleteEmployeeDialog
+          employee={employeeToDelete}
+          isDeleting={deleteMutation.isPending}
+          onCancel={closeDeleteDialog}
+          onConfirm={confirmDeleteEmployee}
+        />
+      ) : null}
+
+      {deleteError ? <div className="state-panel error-state">{deleteError}</div> : null}
+
       <EmployeeFilters filters={filters} onChange={setFilters} />
 
       {isLoading ? <div className="state-panel">Loading employees...</div> : null}
@@ -140,7 +183,7 @@ export function EmployeesPage() {
       {data && data.data.length > 0 ? (
         <>
           {isFetching ? <div className="subtle-status">Refreshing employee data...</div> : null}
-          <EmployeeTable employees={data.data} onEdit={openEditForm} />
+          <EmployeeTable employees={data.data} onEdit={openEditForm} onDelete={openDeleteDialog} />
           <Pagination
             page={data.meta.page}
             totalPages={data.meta.totalPages}

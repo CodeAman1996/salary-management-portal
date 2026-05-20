@@ -1,16 +1,17 @@
-import { Pencil } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import { Employee } from "../types/employee";
 
 type EmployeeTableProps = {
   employees: Employee[];
   onEdit: (employee: Employee) => void;
+  onDelete: (employee: Employee) => void;
 };
 
 const salaryFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0
 });
 
-export function EmployeeTable({ employees, onEdit }: EmployeeTableProps) {
+export function EmployeeTable({ employees, onEdit, onDelete }: EmployeeTableProps) {
   return (
     <div className="table-panel">
       <table className="data-table">
@@ -46,9 +47,19 @@ export function EmployeeTable({ employees, onEdit }: EmployeeTableProps) {
                 </span>
               </td>
               <td>
-                <button type="button" className="icon-button" onClick={() => onEdit(employee)} aria-label={`Edit ${employee.fullName}`}>
-                  <Pencil size={16} />
-                </button>
+                <div className="row-actions">
+                  <button type="button" className="icon-button" onClick={() => onEdit(employee)} aria-label={`Edit ${employee.fullName}`}>
+                    <Pencil size={16} />
+                  </button>
+                  <button
+                    type="button"
+                    className="icon-button danger-icon"
+                    onClick={() => onDelete(employee)}
+                    aria-label={`Delete ${employee.fullName}`}
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
               </td>
             </tr>
           ))}
