@@ -36,3 +36,15 @@ export type ApiSuccessResponse<T> = {
   success: true;
   data: T;
 };
+
+export type EmployeeFormInput = {
+  fullName: string;
+  email: string;
+  jobTitle: string;
+  department: string;
+  country: string;
+  salary: number;
+  currency: string;
+  employmentType: Employee["employmentType"];
+  status: Employee["status"];
+};

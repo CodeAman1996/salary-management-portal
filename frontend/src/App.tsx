@@ -7,7 +7,13 @@ export function App() {
   return (
     <div className="app-shell">
       <aside className="sidebar">
-        <div className="brand">Salary Portal</div>
+        <div className="brand">
+          <span className="brand-mark">SP</span>
+          <div>
+            <strong>Salary Portal</strong>
+            <span>HR operations</span>
+          </div>
+        </div>
         <nav className="nav-list" aria-label="Primary navigation">
           <NavLink to="/" end>
             <UsersRound size={18} />
