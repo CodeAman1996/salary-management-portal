@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "cec7f8e3-012d-4137-a102-ba04f8f2bac7",
+		"name": "salary-management-portal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31022004"
+	},
+	"item": [
+		{
+			"name": "create-employee",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"fullName\": \"Aman Sharma\",\n  \"email\": \"aman.sharma.test@example.com\",\n  \"jobTitle\": \"Software Engineer\",\n  \"department\": \"Engineering\",\n  \"country\": \"India\",\n  \"salary\": 100000,\n  \"currency\": \"INR\",\n  \"employmentType\": \"FULL_TIME\",\n  \"status\": \"ACTIVE\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update employee",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"fullName\": \"Aman Sharma\",\n  \"email\": \"aman.sharma.updated@gmail.com\",\n  \"jobTitle\": \"Senior Software Engineer\",\n  \"department\": \"Engineering\",\n  \"country\": \"India\",\n  \"salary\": 125000,\n  \"currency\": \"INR\",\n  \"employmentType\": \"FULL_TIME\",\n  \"status\": \"ACTIVE\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/employees/28d713af-82a2-4593-ac74-8c0304955705",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"employees",
+						"28d713af-82a2-4593-ac74-8c0304955705"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete employee",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/employees/28d713af-82a2-4593-ac74-8c0304955705",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"employees",
+						"28d713af-82a2-4593-ac74-8c0304955705"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insights summary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/insights/summary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"insights",
+						"summary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insights salary by country",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "avearage salary by job in country",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/insights/average-by-job-title?country=India&jobTitle=Software%20Engineer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"insights",
+						"average-by-job-title"
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "India"
+						},
+						{
+							"key": "jobTitle",
+							"value": "Software%20Engineer"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get employee by employee id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/employees/c7b17dae-5400-46f2-be9d-56fc93abb6f3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"employees",
+						"c7b17dae-5400-46f2-be9d-56fc93abb6f3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list employees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/employees?page=1&pageSize=25",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"employees"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "25"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list employee by filter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/employees?page=1&pageSize=25&country=India&jobTitle=Software%20Engineer&search=Aman",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"employees"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "25"
+						},
+						{
+							"key": "country",
+							"value": "India"
+						},
+						{
+							"key": "jobTitle",
+							"value": "Software%20Engineer"
+						},
+						{
+							"key": "search",
+							"value": "Aman"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
