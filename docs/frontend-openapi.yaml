@@ -1,0 +1,36 @@
+openapi: 3.0.3
+info:
+  title: Salary Management Frontend Routes
+  version: 1.0.0
+  description: Swagger-style documentation for the React frontend routes and screens.
+servers:
+  - url: http://localhost:5173
+    description: Local Vite frontend
+paths:
+  /:
+    get:
+      summary: Employees screen
+      description: Employee management UI with listing, filters, pagination, create, update, and delete actions.
+      responses:
+        "200":
+          description: React application renders the Employees page.
+  /insights:
+    get:
+      summary: Salary insights screen
+      description: Dashboard UI for overall salary summary, country salary stats, and job-title salary average.
+      responses:
+        "200":
+          description: React application renders the Salary Insights page.
+components:
+  schemas:
+    FrontendScreen:
+      type: object
+      properties:
+        route:
+          type: string
+        purpose:
+          type: string
+        backendApisUsed:
+          type: array
+          items:
+            type: string

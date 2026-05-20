@@ -51,6 +51,22 @@ Health check:
 curl http://localhost:4000/health
 ```
 
+## Local Frontend Setup
+
+Open a second terminal:
+
+```bash
+cd C:\Users\Aman\salary-management-portal\frontend
+npm install
+npm run dev
+```
+
+The frontend runs at:
+
+```txt
+http://localhost:5173
+```
+
 ## Environment Variables
 
 The local Docker PostgreSQL database uses port `5433` on your machine.
@@ -139,6 +155,14 @@ npm test
 npm run build
 ```
 
+Frontend:
+
+```bash
+cd frontend
+npm test
+npm run build
+```
+
 ## API Endpoints
 
 ```txt
@@ -205,3 +229,24 @@ curl -X POST http://localhost:4000/api/employees ^
 - Frontend: to be added after backend completion
 
 Docker is included only for local development convenience. The app uses `DATABASE_URL`, so Render can connect to any hosted PostgreSQL database.
+
+## Project Documentation
+
+Shareable project document:
+
+```txt
+document.md
+```
+
+Swagger/OpenAPI docs:
+
+```txt
+docs/backend-openapi.yaml
+docs/frontend-openapi.yaml
+```
+
+Open the YAML files in:
+
+```txt
+https://editor.swagger.io/
+```
