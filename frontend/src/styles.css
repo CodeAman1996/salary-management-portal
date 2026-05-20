@@ -26,6 +26,20 @@ a {
   text-decoration: none;
 }
 
+button,
+input,
+select {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(15, 118, 110, 0.28);
+  outline-offset: 2px;
+}
+
 .app-shell {
   display: grid;
   grid-template-columns: 264px 1fr;
@@ -108,6 +122,7 @@ a {
   align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
+  flex-wrap: wrap;
 }
 
 .page-header h1 {
@@ -130,7 +145,7 @@ a {
 
 .insight-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
   gap: 14px;
 }
 
@@ -359,7 +374,7 @@ a {
 
 .filter-bar {
   display: grid;
-  grid-template-columns: minmax(260px, 1.4fr) repeat(3, minmax(160px, 1fr));
+  grid-template-columns: minmax(240px, 1.4fr) repeat(3, minmax(150px, 1fr));
   gap: 12px;
   align-items: end;
   border: 1px solid rgba(23, 33, 29, 0.08);
@@ -396,7 +411,7 @@ a {
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  grid-template-columns: repeat(3, minmax(170px, 1fr));
   gap: 14px;
 }
 
@@ -625,6 +640,7 @@ a {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .pagination {
@@ -686,6 +702,28 @@ a {
   font-size: 13px;
 }
 
+@media (max-width: 1120px) {
+  .app-shell {
+    grid-template-columns: 230px 1fr;
+  }
+
+  .main-content {
+    padding: 28px;
+  }
+
+  .insight-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+
+  .filter-bar {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+
+  .form-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+}
+
 @media (max-width: 760px) {
   .app-shell {
     grid-template-columns: 1fr;
@@ -694,10 +732,31 @@ a {
   .sidebar {
     border-right: 0;
     border-bottom: 1px solid #d9dee8;
+    padding: 18px;
   }
 
   .main-content {
     padding: 22px;
+  }
+
+  .brand {
+    margin-bottom: 18px;
+  }
+
+  .nav-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nav-list a {
+    justify-content: center;
+  }
+
+  .page-header h1 {
+    font-size: 28px;
+  }
+
+  .primary-button {
+    width: 100%;
   }
 
   .filter-bar {
@@ -721,5 +780,44 @@ a {
   .pagination {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .pagination-actions,
+  .dialog-actions,
+  .form-actions {
+    width: 100%;
+  }
+
+  .pagination-actions button,
+  .dialog-actions button,
+  .form-actions button {
+    flex: 1;
+  }
+}
+
+@media (max-width: 460px) {
+  .main-content {
+    padding: 16px;
+  }
+
+  .brand div > span {
+    display: none;
+  }
+
+  .nav-list {
+    grid-template-columns: 1fr;
+  }
+
+  .insight-card,
+  .summary-tile,
+  .form-panel,
+  .filter-bar,
+  .insight-panel,
+  .state-panel {
+    padding: 14px;
+  }
+
+  .confirm-dialog {
+    padding: 18px;
   }
 }

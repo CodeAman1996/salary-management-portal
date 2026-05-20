@@ -1,0 +1,328 @@
+openapi: 3.0.3
+info:
+  title: Salary Management Backend API
+  version: 1.0.0
+  description: API documentation for employee management and salary insights.
+servers:
+  - url: http://localhost:4000
+    description: Local backend
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        "200":
+          description: API is running
+  /api/employees:
+    get:
+      summary: List employees
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+            default: 25
+            maximum: 100
+        - in: query
+          name: search
+          schema:
+            type: string
+        - in: query
+          name: country
+          schema:
+            type: string
+        - in: query
+          name: jobTitle
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Paginated employees
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmployeeListResponse"
+    post:
+      summary: Create employee
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmployeeInput"
+      responses:
+        "201":
+          description: Employee created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmployeeResponse"
+        "409":
+          description: Employee email already exists
+  /api/employees/{id}:
+    get:
+      summary: Get employee by id
+      parameters:
+        - $ref: "#/components/parameters/EmployeeId"
+      responses:
+        "200":
+          description: Employee found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmployeeResponse"
+        "404":
+          description: Employee not found
+    put:
+      summary: Update employee
+      parameters:
+        - $ref: "#/components/parameters/EmployeeId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmployeeInput"
+      responses:
+        "200":
+          description: Employee updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmployeeResponse"
+        "404":
+          description: Employee not found
+        "409":
+          description: Employee email already exists
+    delete:
+      summary: Delete employee
+      parameters:
+        - $ref: "#/components/parameters/EmployeeId"
+      responses:
+        "204":
+          description: Employee deleted
+        "404":
+          description: Employee not found
+  /api/insights/summary:
+    get:
+      summary: Get overall salary summary
+      responses:
+        "200":
+          description: Salary summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalarySummaryResponse"
+  /api/insights/salary-by-country:
+    get:
+      summary: Get salary stats for a country
+      parameters:
+        - in: query
+          name: country
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Country salary stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CountryInsightResponse"
+  /api/insights/average-by-job-title:
+    get:
+      summary: Get average salary for job title in a country
+      parameters:
+        - in: query
+          name: country
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: jobTitle
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Job title salary average
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobTitleInsightResponse"
+components:
+  parameters:
+    EmployeeId:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    ApiSuccess:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+    Employee:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        fullName:
+          type: string
+        email:
+          type: string
+          nullable: true
+        jobTitle:
+          type: string
+        department:
+          type: string
+        country:
+          type: string
+        salary:
+          type: number
+        currency:
+          type: string
+        employmentType:
+          type: string
+          enum: [FULL_TIME, PART_TIME, CONTRACT]
+        status:
+          type: string
+          enum: [ACTIVE, INACTIVE]
+        joiningDate:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    EmployeeInput:
+      type: object
+      required: [fullName, jobTitle, department, country, salary]
+      properties:
+        fullName:
+          type: string
+          example: Aman Sharma
+        email:
+          type: string
+          nullable: true
+          example: aman.sharma@example.com
+        jobTitle:
+          type: string
+          example: Software Engineer
+        department:
+          type: string
+          example: Engineering
+        country:
+          type: string
+          example: India
+        salary:
+          type: number
+          example: 100000
+        currency:
+          type: string
+          example: INR
+        employmentType:
+          type: string
+          enum: [FULL_TIME, PART_TIME, CONTRACT]
+        status:
+          type: string
+          enum: [ACTIVE, INACTIVE]
+    EmployeeResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiSuccess"
+        - type: object
+          properties:
+            data:
+              $ref: "#/components/schemas/Employee"
+    EmployeeListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiSuccess"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Employee"
+                meta:
+                  type: object
+                  properties:
+                    page:
+                      type: integer
+                    pageSize:
+                      type: integer
+                    total:
+                      type: integer
+                    totalPages:
+                      type: integer
+    SalarySummaryResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiSuccess"
+        - type: object
+          properties:
+            data:
+              $ref: "#/components/schemas/SalarySummary"
+    CountryInsightResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiSuccess"
+        - type: object
+          properties:
+            data:
+              $ref: "#/components/schemas/CountryInsight"
+    JobTitleInsightResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiSuccess"
+        - type: object
+          properties:
+            data:
+              $ref: "#/components/schemas/JobTitleInsight"
+    SalarySummary:
+      type: object
+      properties:
+        employeeCount:
+          type: integer
+        countryCount:
+          type: integer
+        minSalary:
+          type: number
+          nullable: true
+        maxSalary:
+          type: number
+          nullable: true
+        averageSalary:
+          type: number
+          nullable: true
+    CountryInsight:
+      allOf:
+        - $ref: "#/components/schemas/SalarySummary"
+        - type: object
+          properties:
+            country:
+              type: string
+    JobTitleInsight:
+      type: object
+      properties:
+        country:
+          type: string
+        jobTitle:
+          type: string
+        employeeCount:
+          type: integer
+        averageSalary:
+          type: number
+          nullable: true
