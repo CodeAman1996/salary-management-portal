@@ -58,6 +58,7 @@ Open a second terminal:
 ```bash
 cd C:\Users\Aman\salary-management-portal\frontend
 npm install
+copy .env.example .env
 npm run dev
 ```
 
@@ -65,6 +66,18 @@ The frontend runs at:
 
 ```txt
 http://localhost:5173
+```
+
+For local backend development, set `frontend/.env` to:
+
+```env
+VITE_API_BASE_URL="http://localhost:4000/api"
+```
+
+For Vercel deployment, set:
+
+```env
+VITE_API_BASE_URL="https://salary-management-app-ni4s.onrender.com/api"
 ```
 
 ## Environment Variables

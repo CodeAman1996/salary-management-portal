@@ -337,7 +337,7 @@ Backend:
 Frontend:
 
 - Deploy React app on Vercel or Netlify.
-- Set `VITE_API_BASE_URL` to the deployed backend API URL.
+- Set `VITE_API_BASE_URL` to `https://salary-management-app-ni4s.onrender.com/api`.
 
 ## Tradeoffs
 
