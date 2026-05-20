@@ -25,6 +25,10 @@ export async function updateEmployee(id: string, input: EmployeeFormInput): Prom
   return response.data.data;
 }
 
+export async function deleteEmployee(id: string): Promise<void> {
+  await http.delete(`/employees/${id}`);
+}
+
 function cleanEmployeePayload(input: EmployeeFormInput) {
   return {
     ...input,
