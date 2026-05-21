@@ -329,15 +329,52 @@ https://editor.swagger.io/
 
 Backend:
 
-- Deploy Node service on Render.
-- Use hosted PostgreSQL such as Render PostgreSQL or Neon.
+- Deploy Node service on Railway.
+- Backend URL: `https://salary-management-portal-production.up.railway.app`
+- API base URL: `https://salary-management-portal-production.up.railway.app/api`
+- Use Railway PostgreSQL or another hosted PostgreSQL database.
 - Set `DATABASE_URL`, `PORT`, and `CORS_ORIGIN`.
 - Use `npm run db:deploy` for production migrations.
 
+Railway backend settings:
+
+```txt
+Root directory: backend
+Build command: npm install && npm run db:generate && npm run build
+Pre-deploy command: npm run db:deploy
+Start command: npm start
+```
+
+Railway backend environment variables:
+
+```env
+DATABASE_URL="<Railway PostgreSQL connection string>"
+PORT=4000
+CORS_ORIGIN="<Vercel frontend production URL>"
+```
+
 Frontend:
 
-- Deploy React app on Vercel or Netlify.
+- Deploy React app on Vercel.
 - Set `VITE_API_BASE_URL` to `https://salary-management-portal-production.up.railway.app/api`.
+
+Vercel frontend settings:
+
+```txt
+Root directory: frontend
+Build command: npm run build
+Output directory: dist
+```
+
+Vercel frontend environment variable:
+
+```env
+VITE_API_BASE_URL="https://salary-management-portal-production.up.railway.app/api"
+```
+
+Important CORS note:
+
+`CORS_ORIGIN` must match the exact Vercel frontend URL being opened in the browser. It should not include `/api` or a trailing slash. For reliable demos, use the stable Vercel production URL instead of a temporary preview URL.
 
 ## Tradeoffs
 
