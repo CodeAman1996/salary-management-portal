@@ -21,12 +21,13 @@
 					"raw": "{\n  \"fullName\": \"Aman Sharma\",\n  \"email\": \"aman.sharma@gmail.com\",\n  \"jobTitle\": \"Software Engineer\",\n  \"department\": \"Engineering\",\n  \"country\": \"India\",\n  \"salary\": 100000,\n  \"currency\": \"INR\",\n  \"employmentType\": \"FULL_TIME\",\n  \"status\": \"ACTIVE\"\n}"
 				},
 				"url": {
-					"raw": "https://salary-management-app-ni4s.onrender.com/api/employees",
+					"raw": "https://salary-management-portal-production.up.railway.app/api/employees",
 					"protocol": "https",
 					"host": [
-						"salary-management-app-ni4s",
-						"onrender",
-						"com"
+						"salary-management-portal-production",
+						"up",
+						"railway",
+						"app"
 					],
 					"path": [
 						"api",
@@ -51,12 +52,13 @@
 					"raw": "{\n  \"fullName\": \"Aman Sharma\",\n  \"email\": \"aman.sharma.updated@gmail.com\",\n  \"jobTitle\": \"Senior Software Engineer\",\n  \"department\": \"Engineering\",\n  \"country\": \"India\",\n  \"salary\": 125000,\n  \"currency\": \"INR\",\n  \"employmentType\": \"FULL_TIME\",\n  \"status\": \"ACTIVE\"\n}"
 				},
 				"url": {
-					"raw": "https://salary-management-app-ni4s.onrender.com/api/employees/ecf7973a-f9ca-4819-a52a-75b6d44e58c3",
+					"raw": "https://salary-management-portal-production.up.railway.app/api/employees/ecf7973a-f9ca-4819-a52a-75b6d44e58c3",
 					"protocol": "https",
 					"host": [
-						"salary-management-app-ni4s",
-						"onrender",
-						"com"
+						"salary-management-portal-production",
+						"up",
+						"railway",
+						"app"
 					],
 					"path": [
 						"api",
@@ -73,12 +75,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://salary-management-app-ni4s.onrender.com/api/employees/28d713af-82a2-4593-ac74-8c0304955705",
+					"raw": "https://salary-management-portal-production.up.railway.app/api/employees/28d713af-82a2-4593-ac74-8c0304955705",
 					"protocol": "https",
 					"host": [
-						"salary-management-app-ni4s",
-						"onrender",
-						"com"
+						"salary-management-portal-production",
+						"up",
+						"railway",
+						"app"
 					],
 					"path": [
 						"api",
@@ -95,12 +98,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://salary-management-app-ni4s.onrender.com/api/insights/summary",
+					"raw": "https://salary-management-portal-production.up.railway.app/api/insights/summary",
 					"protocol": "https",
 					"host": [
-						"salary-management-app-ni4s",
-						"onrender",
-						"com"
+						"salary-management-portal-production",
+						"up",
+						"railway",
+						"app"
 					],
 					"path": [
 						"api",
@@ -117,12 +121,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://salary-management-app-ni4s.onrender.com/api/insights/salary-by-country?country=India",
+					"raw": "https://salary-management-portal-production.up.railway.app/api/insights/salary-by-country?country=India",
 					"protocol": "https",
 					"host": [
-						"salary-management-app-ni4s",
-						"onrender",
-						"com"
+						"salary-management-portal-production",
+						"up",
+						"railway",
+						"app"
 					],
 					"path": [
 						"api",
@@ -145,12 +150,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://salary-management-app-ni4s.onrender.com/api/insights/average-by-job-title?country=India&jobTitle=Software%20Engineer",
+					"raw": "https://salary-management-portal-production.up.railway.app/api/insights/average-by-job-title?country=India&jobTitle=Software%20Engineer",
 					"protocol": "https",
 					"host": [
-						"salary-management-app-ni4s",
-						"onrender",
-						"com"
+						"salary-management-portal-production",
+						"up",
+						"railway",
+						"app"
 					],
 					"path": [
 						"api",
@@ -177,12 +183,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://salary-management-app-ni4s.onrender.com/api/employees/c7b17dae-5400-46f2-be9d-56fc93abb6f3",
+					"raw": "https://salary-management-portal-production.up.railway.app/api/employees/c7b17dae-5400-46f2-be9d-56fc93abb6f3",
 					"protocol": "https",
 					"host": [
-						"salary-management-app-ni4s",
-						"onrender",
-						"com"
+						"salary-management-portal-production",
+						"up",
+						"railway",
+						"app"
 					],
 					"path": [
 						"api",
@@ -199,12 +206,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/api/employees?page=1&pageSize=25",
-					"protocol": "http",
+					"raw": "https://salary-management-portal-production.up.railway.app/api/employees?page=1&pageSize=25",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"salary-management-portal-production",
+						"up",
+						"railway",
+						"app"
 					],
-					"port": "4000",
 					"path": [
 						"api",
 						"employees"
@@ -229,12 +238,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/api/employees?page=1&pageSize=25&country=India&jobTitle=Software%20Engineer&search=Aman",
-					"protocol": "http",
+					"raw": "https://salary-management-portal-production.up.railway.app/api/employees?page=1&pageSize=25&country=India&jobTitle=Software%20Engineer&search=Aman",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"salary-management-portal-production",
+						"up",
+						"railway",
+						"app"
 					],
-					"port": "4000",
 					"path": [
 						"api",
 						"employees"
