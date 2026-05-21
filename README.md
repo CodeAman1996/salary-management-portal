@@ -237,11 +237,42 @@ curl -X POST http://localhost:4000/api/employees ^
 
 ## Deployment Plan
 
-- Backend: Render
-- Database: hosted PostgreSQL, for example Neon or Render PostgreSQL
-- Frontend: to be added after backend completion
+Backend:
 
-Docker is included only for local development convenience. The app uses `DATABASE_URL`, so Render can connect to any hosted PostgreSQL database.
+- Platform: Railway
+- Backend URL: `https://salary-management-portal-production.up.railway.app`
+- API base URL: `https://salary-management-portal-production.up.railway.app/api`
+- Root directory: `backend`
+- Build command: `npm install && npm run db:generate && npm run build`
+- Pre-deploy command: `npm run db:deploy`
+- Start command: `npm start`
+
+Railway backend environment variables:
+
+```env
+DATABASE_URL="<Railway PostgreSQL connection string>"
+PORT=4000
+CORS_ORIGIN="<Vercel frontend production URL>"
+```
+
+Frontend:
+
+- Platform: Vercel
+- Root directory: `frontend`
+- Build command: `npm run build`
+- Output directory: `dist`
+
+Vercel frontend environment variable:
+
+```env
+VITE_API_BASE_URL="https://salary-management-portal-production.up.railway.app/api"
+```
+
+Important CORS note:
+
+`CORS_ORIGIN` must be the exact Vercel frontend origin opened in the browser. Do not include `/api` or a trailing slash. Prefer the stable production Vercel URL instead of temporary preview URLs.
+
+Docker is included only for local development convenience. The deployed backend uses Railway PostgreSQL through `DATABASE_URL`.
 
 ## Project Documentation
 
